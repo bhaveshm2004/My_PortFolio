@@ -1,13 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
+import Achievements from "@/components/Achievements";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import { Helmet } from "react-helmet-async";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <>
+      <Helmet>
+        <title>Bhavesh Maske | Software Engineer & Cloud Specialist</title>
+        <meta 
+          name="description" 
+          content="Portfolio of Bhavesh Maske - Software Engineer specializing in AWS cloud infrastructure, Docker, and DevOps. Building scalable solutions with 99.9% uptime." 
+        />
+        <meta name="keywords" content="Bhavesh Maske, Software Engineer, AWS, Cloud, DevOps, Docker, Portfolio" />
+        <link rel="canonical" href="https://bhaveshmaske.dev" />
+      </Helmet>
+      
+      <div className="min-h-screen">
+        <Navigation />
+        <main>
+          <Hero />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Achievements />
+          <Contact />
+        </main>
+        <Footer />
       </div>
-    </div>
+    </>
   );
 };
 
