@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Mail, Phone, ChevronDown } from "lucide-react";
+import profilePhoto from "@/assets/profile.jpg";
 
 const Hero = () => {
   return (
@@ -15,8 +16,35 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-[size:60px_60px] opacity-20" />
 
       <div className="relative z-10 text-center max-w-4xl mx-auto">
+        {/* Profile photo */}
+        <div className="animate-fade-up opacity-0 flex justify-center mb-8">
+          <div className="relative group">
+            {/* Outer rotating gradient ring */}
+            <div
+              className="absolute -inset-1 rounded-full opacity-75 blur-md group-hover:opacity-100 transition-opacity duration-500"
+              style={{ background: "var(--gradient-text)" }}
+            />
+            {/* Pulsing glow */}
+            <div className="absolute inset-0 rounded-full pulse-glow" />
+            {/* Photo frame */}
+            <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full p-[3px]" style={{ background: "var(--gradient-text)" }}>
+              <div className="w-full h-full rounded-full overflow-hidden bg-card border-2 border-background">
+                <img
+                  src={profilePhoto}
+                  alt="Bhavesh Maske - Software Engineer & Cloud Specialist"
+                  width={256}
+                  height={256}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            {/* Status dot */}
+            <div className="absolute bottom-2 right-2 w-5 h-5 rounded-full bg-green-500 border-4 border-background animate-pulse" />
+          </div>
+        </div>
+
         {/* Status badge */}
-        <div className="animate-fade-up opacity-0 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 backdrop-blur-sm border border-border/50 mb-8">
+        <div className="animate-fade-up opacity-0 animation-delay-100 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 backdrop-blur-sm border border-border/50 mb-8">
           <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
           <span className="text-sm text-muted-foreground font-display">Available for opportunities</span>
         </div>
