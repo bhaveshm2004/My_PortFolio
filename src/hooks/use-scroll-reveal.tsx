@@ -1,30 +1,36 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-export const useScrollReveal = <T extends HTMLElement = HTMLDivElement>(
-  options: IntersectionObserverInit = { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
-) => {
-  const ref = useRef<T | null>(null);
-
+/**
+ * Auto-reveals sections and elements with [data-reveal] as they enter the viewport.
+ * Mount once at the page root.
+ */
+export const useScrollReveal = () => {
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const selector = "section, [data-reveal]";
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(selector));
 
-    const targets = el.querySelectorAll<HTMLElement>("[data-reveal]");
-    targets.forEach((t) => t.classList.add("reveal-init"));
+    targets.forEach((el) => {
+      // Skip the hero (first section) so it shows immediately on load
+      if (el.tagName === "SECTION" && el === document.querySelector("section")) return;
+      el.classList.add("reveal-init");
+    });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("reveal-in");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, options);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-in");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
+    );
 
-    targets.forEach((t) => observer.observe(t));
+    targets.forEach((el) => {
+      if (el.classList.contains("reveal-init")) observer.observe(el);
+    });
 
     return () => observer.disconnect();
   }, []);
-
-  return ref;
 };
