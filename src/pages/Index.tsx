@@ -7,8 +7,10 @@ import Achievements from "@/components/Achievements";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { Helmet } from "react-helmet-async";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const Index = () => {
+  useScrollReveal();
   return (
     <>
       <Helmet>
